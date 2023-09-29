@@ -42,6 +42,9 @@ model User {
 enum SessionType {
   USER_VERIFICATION
   LOGIN
+  SIGN_UP
+  SIGN_IN
+  SIGN_OUT
   ONLINE
 }
 
