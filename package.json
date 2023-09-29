@@ -1,0 +1,21 @@
+{
+  "name": "@reynandaptr/express-prisma-migration",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "preinstall": "npx only-allow pnpm",
+    "migrate:prepare:test": "prisma migrate dev --create-only --name init",
+    "migrate:apply:test": "prisma migrate dev",
+    "migrate:apply:production": "prisma migrate deploy"
+  },
+  "keywords": [],
+  "author": "Reynanda Putra Pratama <reynandapp1997@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "prisma": "^4.13.0",
+    "prisma-docs-generator": "^0.7.0"
+  },
+  "dependencies": {
+    "@prisma/client": "4.13.0"
+  }
+}
