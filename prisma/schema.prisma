@@ -41,12 +41,13 @@ model User {
 }
 
 enum SessionType {
-  USER_VERIFICATION
+  USER_VERIFICATION // Deprecated
   LOGIN
   SIGN_UP
-  SIGN_IN
+  SIGN_IN // Deprecated
   SIGN_OUT
   ONLINE
+  EMAIL_VERIFICATION
 }
 
 model Session {
@@ -55,8 +56,11 @@ model Session {
   type    SessionType @map("type")
   token   String?     @map("token")
 
-  created_at DateTime @default(now()) @map("created_at")
-  updated_at DateTime @updatedAt @map("updated_at")
+  start_time BigInt? @map("start_time")
+  end_time   BigInt? @map("end_time")
+
+  created_at              DateTime @default(now()) @map("created_at")
+  updated_at              DateTime @updatedAt @map("updated_at")
 
   user User @relation(fields: [user_id], references: [id])
 
