@@ -59,4 +59,6 @@ model Session {
   updated_at DateTime @updatedAt @map("updated_at")
 
   user User @relation(fields: [user_id], references: [id])
+
+  @@map("sessions")
 }
