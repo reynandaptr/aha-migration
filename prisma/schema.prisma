@@ -12,3 +12,47 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+enum LoginProvider {
+  USER_DEFINED_PASSWORD
+  GOOGLE
+}
+
+model User {
+  id          Int     @id @default(autoincrement()) @map("id")
+  name        String? @map("name")
+  email       String? @map("email")
+  is_verified Boolean @default(false) @map("is_verified")
+
+  provider_id   String        @map("provider_id")
+  provider      LoginProvider @map("provider")
+  access_token  String        @map("access_token")
+  refresh_token String?       @map("refresh_token")
+  expired_at    BigInt?       @map("expired_at")
+
+  created_at DateTime @default(now()) @map("created_at")
+  updated_at DateTime @updatedAt @map("updated_at")
+
+  sessions Session[]
+
+  @@unique([provider, provider_id])
+  @@map("users")
+}
+
+enum SessionType {
+  USER_VERIFICATION
+  LOGIN
+  ONLINE
+}
+
+model Session {
+  id      Int         @id @default(autoincrement()) @map("id")
+  user_id Int         @map("user_id")
+  type    SessionType @map("type")
+  token   String?     @map("token")
+
+  created_at DateTime @default(now()) @map("created_at")
+  updated_at DateTime @updatedAt @map("updated_at")
+
+  user User @relation(fields: [user_id], references: [id])
+}
