@@ -21,12 +21,13 @@ enum LoginProvider {
 model User {
   id          Int     @id @default(autoincrement()) @map("id")
   name        String? @map("name")
-  email       String? @map("email")
+  email       String  @map("email")
+  password    String? @map("password")
   is_verified Boolean @default(false) @map("is_verified")
 
   provider_id   String        @map("provider_id")
   provider      LoginProvider @map("provider")
-  access_token  String        @map("access_token")
+  access_token  String?       @map("access_token")
   refresh_token String?       @map("refresh_token")
   expired_at    BigInt?       @map("expired_at")
 
